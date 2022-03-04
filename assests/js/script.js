@@ -1,6 +1,7 @@
 //creating a variable for form let's us interact with the form and some of it's child HTML elements
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
+var taskIdCounter = 0;
 
 var taskFormHandler = function (event) {
     //tells browser to not immediately refresh page upon clicking a button. 
@@ -35,6 +36,8 @@ var createTaskEl = function(taskDataObj) {
   var listItemEl = document.createElement("li");
   // style the new task item w selector style already being used in current css
   listItemEl.className = "task-item";
+  // adding task id as a custom attribute
+  listItemEl.setAttribute("data-task-id", taskIdCounter);
   // creating a div so all content is bundled together 
   var taskInfoEl = document.createElement("div");
   taskInfoEl.className = "task-info";
@@ -44,6 +47,51 @@ var createTaskEl = function(taskDataObj) {
   listItemEl.appendChild(taskInfoEl);
   // append entire LI to the parent UL
   tasksToDoEl.appendChild(listItemEl);
+
+  //increase task counter for next unique id
+  taskIdCounter++;
+};
+
+var createTaskActions = function (taskId) {
+    var actionContainerEl = document.createElement("div");
+    actionContainerEl.className = "task-actions";
+
+    // creating the edit button
+    var editButtonEl = document.createElement("button");
+    editButtonEl.textContent = "Edit";
+    editButtonEl.className = "btn edit-btn";
+    editButtonEl.setAttribute("data-task-id", taskId);
+
+    actionContainerEl.appendChild(editButtonEl);
+
+    // creating the delete button
+    var deleteButtonEl = document.createElement("button");
+    deleteButtonEl.textContent = "Delete";
+    deleteButtonEl.className = "btn delete-btn"
+    deleteButtonEl.setAttribute("data-task-id", taskId);
+
+    actionContainerEl.appendChild(deleteButtonEl);
+
+    var statusSelectEl = document.createElement("select");
+    statusSelectEl.className = "select-status";
+    statusSelectEl.setAttribute("name", "status-change");
+    statusSelectEl("data-task-id", taskId);
+
+    actionContainerEl.appendChild(statusSelectEl);
+
+    return actionContainerEl;
+};
+
+var statusChoices = ["To Do", "In Progress", "Compelted"];
+
+for (var i = 0; i < statusChoices.length; i++) {
+    // create option element
+    var statusOptionEl = document.createElement("option");
+    statusOptionEl.textContent = statusChoices[i];
+    statusOptionEl.setAttribute("value", statusChoices[i]);
+
+    // append to select
+    statusSelectEl.appendChild(statusOptionEl);
 }
 
 //adding event listener to function above - because function is created, we can call it below - "when a user clicks a button element w a type attribute that has a value of submit, when the user presses Enter on keyboard" run fuction
