@@ -12,14 +12,22 @@ var taskFormHandler = function (event) {
     var taskTypeInput = document.querySelector("select[name='task-type']").value;
     //we used console.dir(taskNameInput); to see in the console where our data was being stored = GETTING | -the we added it to the var taskNameInput = SETTING
 
+    //check if input values are empty strings 
+    if (!taskNameInput || !taskTypeInput) {
+        alert("You need to fill out the task form!");
+        return false;
+    }
+
+    formEl.reset();
+    
     //packaging up data as an object
     var taskDataObj = {
         name: taskNameInput,
         type: taskTypeInput
     };
-
+    
     createTaskEl(taskDataObj);
-}
+};
 
 // will hold the code that creates a new task HTML element
 var createTaskEl = function(taskDataObj) {
