@@ -17,13 +17,11 @@ var taskFormHandler = function (event) {
     var taskTypeInput = document.querySelector("select[name='task-type']").value;
     //we used console.dir(taskNameInput); to see in the console where our data was being stored = GETTING | -the we added it to the var taskNameInput = SETTING
 
-    //check if input values are empty strings 
+    //check if input values are empty strings BEGIN AGAIN
     if (!taskNameInput || !taskTypeInput) {
         alert("You need to fill out the task form!");
         return false;
     }
-
-    formEl.reset();
     
     var isEdit = formEl.hasAttribute("data-task-id");
    
@@ -71,7 +69,7 @@ var createTaskEl = function(taskDataObj) {
 };
 
 var createTaskActions = function (taskId) {
-
+    // container to hold elements
     var actionContainerEl = document.createElement("div");
     actionContainerEl.className = "task-actions";
 
@@ -98,7 +96,7 @@ var createTaskActions = function (taskId) {
 
     actionContainerEl.appendChild(statusSelectEl);
     // creating status options 
-    var statusChoices = ["To Do", "In Progress", "Compeleted"];
+    var statusChoices = ["To Do", "In Progress", "Completed"];
     
     for (var i = 0; i < statusChoices.length; i++) {
     // create option element
