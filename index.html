@@ -7,20 +7,50 @@
     <title>Taskinator</title>
     <link rel="stylesheet" href="./assests/css/style.css">
 </head>
+
 <body>
     <header>
         <h1 class="page-title">Taskinator</h1>
         <p> Click the button below to add a new task!</p>
-        <button class="btn"> Add Task </button>
+               
+        <form id="task-form"> 
+            <div class="form-group">
+                <!--Adding input for user to self-assign a task. placeholder text that will leave = Enter Task Name-->
+                <input type="text" name="task-name" placeholder="Enter Task Name" />
+            </div>
+            <!--allows us to select from a dropdown of predetermined list of options-->
+            <div class="form-group">
+                <!--tells browser we're about to create a type of dropdown list for the purpose of name"___"-->
+                <select name="task-type" class="select-dropdown">
+                    <!--option + value is the actual value within the dropdown of select | the first opeion Pick a Task Type - disabled prevents it from being chosen by the user-->
+                    <option value="" disabled selected>Pick a task type</option>
+                    <option value="Work">Work</option>
+                    <option value="Class">Class</option>
+                    <option value="Personal">Personal</option>
+                </select>
+            </div>
+            <!--wrapped the button in a div with form-group class to make styling easier--> 
+            <div class ="form-group">
+                <button class="btn" id="save-task" type="submit">Add Task</button>
+            </div>
+        </form>
     </header>
 
-    <main class="page-content">
+    <main class="page-content" id="page-content">
         <section class="task-list-wrapper">
-            <h2 class="list-title"> Tasks To Do</h2>
-
-            <ul class="task-list">
-                <li class="task-item"> A task is going to be added soon</li>
+            <h2 class="list-title">Tasks To Do</h2>
+            <ul class="task-list" id="tasks-to-do">
             </ul>
+        </section>
+        <!--Tasks in Progress-->
+        <section class="task-list-wrapper">
+            <h2 class="list-title">Tasks In Progress</h2>
+            <ul class="task-list" id="tasks-in-progress"></ul>
+        </section>
+        <!--Tasks Completed-->
+        <section class="task-list-wrapper">
+            <h2 class="list-title">Tasks Completed</h2>
+            <ul class="task-list" id="tasks-completed"></ul>
         </section>
     </main>
 
